@@ -35,7 +35,7 @@
 
 /* ── Reset ── */
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth;font-size:16px}
+html{scroll-behavior:smooth;font-size:16px;overflow-x:hidden}
 body{font-family:var(--sans);color:var(--gray-700);background:var(--white);line-height:1.7;overflow-x:hidden}
 img{max-width:100%;height:auto;display:block}
 a{text-decoration:none;color:inherit;transition:all .3s var(--ease)}
@@ -632,6 +632,9 @@ h2 span{color:var(--orange)}
 }
 
 @media(max-width:900px){
+  /* Always show dark navbar on mobile — hamburger must be visible on page load */
+  #navbar{background:rgba(15,23,42,.94);backdrop-filter:blur(20px)}
+
   section{padding:72px 0}
   .about-grid{grid-template-columns:1fr}
   .about-images{display:none}
@@ -670,4 +673,9 @@ h2 span{color:var(--orange)}
   .footer-bottom .container{flex-direction:column;gap:6px;text-align:center}
   .hero-title{font-size:clamp(2rem,9vw,3rem)}
   .img-accent{display:none}
+
+  /* Fix WhatsApp button causing horizontal overflow on mobile */
+  .wa-float{right:14px;bottom:16px;width:50px;height:50px;font-size:1.5rem}
+  .wa-tooltip{display:none}
+  .back-top{right:14px;bottom:78px;width:40px;height:40px;font-size:.85rem}
 }
