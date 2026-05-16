@@ -101,23 +101,153 @@ h2 span{color:var(--orange)}
 /* ── Preloader ── */
 #preloader{
   position:fixed;inset:0;
-  background:var(--navy);
+  background:radial-gradient(ellipse at center, #1a2a4a 0%, #0F172A 70%);
   display:flex;align-items:center;justify-content:center;
   z-index:9999;
-  transition:opacity .5s ease, visibility .5s ease;
+  transition:opacity .8s ease, visibility .8s ease;
 }
 #preloader.hidden{opacity:0;visibility:hidden;pointer-events:none}
-.loader{text-align:center}
-.loader-ring{
-  width:56px;height:56px;
-  border:3px solid rgba(255,255,255,.1);
-  border-top-color:var(--orange);
-  border-radius:50%;
-  animation:spin 1s linear infinite;
-  margin:0 auto 14px;
+
+.loader{
+  display:flex;flex-direction:column;align-items:center;gap:20px;
 }
-.loader-text{font-family:var(--serif);font-size:1.6rem;font-weight:700;color:#fff;letter-spacing:2px}
-@keyframes spin{to{transform:rotate(360deg)}}
+
+/* Logo wrapper with glow + shine */
+.loader-logo-wrap{
+  position:relative;
+  width:130px;height:130px;
+  display:flex;align-items:center;justify-content:center;
+}
+
+/* Outer glow ring */
+.loader-logo-wrap::before{
+  content:'';
+  position:absolute;inset:-12px;
+  border-radius:50%;
+  background:conic-gradient(
+    from 0deg,
+    transparent 0%,
+    rgba(249,115,22,.6) 25%,
+    rgba(245,158,11,.8) 50%,
+    rgba(249,115,22,.6) 75%,
+    transparent 100%
+  );
+  animation:spinGlow 2.5s linear infinite;
+}
+
+/* Inner background circle */
+.loader-logo-wrap::after{
+  content:'';
+  position:absolute;inset:-4px;
+  border-radius:50%;
+  background:#0F172A;
+}
+
+.loader-logo{
+  position:relative;z-index:2;
+  width:120px;height:120px;
+  object-fit:contain;
+  border-radius:50%;
+  animation:logoPulse 2s ease-in-out infinite;
+  filter:drop-shadow(0 0 20px rgba(249,115,22,.5));
+}
+
+.loader-logo-fallback{
+  position:relative;z-index:2;
+  width:120px;height:120px;border-radius:50%;
+  background:var(--orange-grad);
+  display:none;align-items:center;justify-content:center;
+  font-size:3rem;color:#fff;
+  animation:logoPulse 2s ease-in-out infinite;
+  box-shadow:0 0 30px rgba(249,115,22,.5);
+}
+
+/* Shine sweep over logo */
+.loader-shine{
+  position:absolute;inset:0;z-index:3;
+  border-radius:50%;overflow:hidden;
+  pointer-events:none;
+}
+.loader-shine::after{
+  content:'';
+  position:absolute;top:0;left:-100%;
+  width:60%;height:100%;
+  background:linear-gradient(
+    105deg,
+    transparent 20%,
+    rgba(255,255,255,.35) 50%,
+    transparent 80%
+  );
+  animation:shineSwipe 2.5s ease-in-out infinite;
+  border-radius:50%;
+}
+
+/* Text below logo */
+.loader-name{
+  display:flex;flex-direction:column;align-items:center;gap:2px;
+  animation:fadeSlideUp .8s ease forwards;
+  animation-delay:.3s;
+  opacity:0;
+}
+.loader-montessori{
+  font-family:'Cinzel',serif;
+  font-size:.72rem;font-weight:400;
+  color:rgba(255,255,255,.5);
+  letter-spacing:4px;text-transform:uppercase;
+}
+.loader-jagathi{
+  font-family:'Cinzel Decorative',serif;
+  font-size:2rem;font-weight:700;
+  color:#fff;letter-spacing:2px;
+  background:linear-gradient(135deg,#fff 30%,#F59E0B 70%,#fff 100%);
+  background-size:200% auto;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+  animation:textShimmer 2.5s linear infinite;
+}
+.loader-school{
+  font-family:'Cinzel',serif;
+  font-size:.65rem;font-weight:400;
+  color:var(--orange);
+  letter-spacing:3px;text-transform:uppercase;
+}
+
+/* Animated dots */
+.loader-dots{display:flex;gap:8px;margin-top:4px}
+.loader-dots span{
+  width:6px;height:6px;border-radius:50%;
+  background:var(--orange);opacity:.3;
+  animation:dotPulse 1.2s ease-in-out infinite;
+}
+.loader-dots span:nth-child(2){animation-delay:.2s}
+.loader-dots span:nth-child(3){animation-delay:.4s}
+
+/* Keyframes */
+@keyframes spinGlow{
+  from{transform:rotate(0deg)}
+  to{transform:rotate(360deg)}
+}
+@keyframes logoPulse{
+  0%,100%{transform:scale(1);filter:drop-shadow(0 0 16px rgba(249,115,22,.4))}
+  50%{transform:scale(1.06);filter:drop-shadow(0 0 32px rgba(249,115,22,.8))}
+}
+@keyframes shineSwipe{
+  0%{left:-100%}
+  50%,100%{left:140%}
+}
+@keyframes textShimmer{
+  0%{background-position:200% center}
+  100%{background-position:-200% center}
+}
+@keyframes fadeSlideUp{
+  from{opacity:0;transform:translateY(12px)}
+  to{opacity:1;transform:translateY(0)}
+}
+@keyframes dotPulse{
+  0%,100%{opacity:.3;transform:scale(1)}
+  50%{opacity:1;transform:scale(1.4)}
+}
 
 /* ── Navbar ── */
 #navbar{

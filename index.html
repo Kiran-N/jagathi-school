@@ -28,8 +28,20 @@
 <!-- Preloader -->
 <div id="preloader">
   <div class="loader">
-    <div class="loader-ring"></div>
-    <div class="loader-text">Jagathi</div>
+    <div class="loader-logo-wrap">
+      <img src="images/logo.png" alt="Jagathi" class="loader-logo"
+           onerror="this.style.display='none';document.querySelector('.loader-logo-fallback').style.display='flex'">
+      <div class="loader-logo-fallback"><i class="fas fa-tree"></i></div>
+      <div class="loader-shine"></div>
+    </div>
+    <div class="loader-name">
+      <span class="loader-montessori">Montessori's</span>
+      <span class="loader-jagathi">Jagathi</span>
+      <span class="loader-school">International School</span>
+    </div>
+    <div class="loader-dots">
+      <span></span><span></span><span></span>
+    </div>
   </div>
 </div>
 
